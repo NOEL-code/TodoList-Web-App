@@ -6,10 +6,16 @@ var logger = require('morgan');
 var cors = require('cors');
 var indexRouter = require('./routes/index');
 const mongoose = require("mongoose");
-
+const session = require('express-session');
 var app = express();
 
-const MONGO_HOST = 'mongodb+srv://admin:admin@cluster0.jtdvjdz.mongodb.net/?retryWrites=true&w=majority';
+const watchaRouter = require('./routes/watcha');
+const boardRouter = require('./routes/board');
+const todoRouter = require('./routes/todo');
+const commentRouter = require('./routes/comment');
+const userRouter = require('./routes/users');
+
+const MONGO_HOST = 'mongodb+srv://admin:admin@cluster0.zbtixhn.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_HOST,{
     retryWrites: true,
@@ -17,9 +23,6 @@ mongoose.connect(MONGO_HOST,{
 }).then(resp=> {
     console.log("DB 연결 성공oo");
 });
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
 
 app.use(cors({origin: [
   'http://127.0.0.1:3000',
@@ -31,24 +34,38 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "<my-secret>",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+)
  
+// app.use(function(req, res, next) {
+//   if(!req.session.path){
+//     req.session.path = [];
+//   }else{
+//     req.session.path.push(req.path);  
+//   }
+//   console.log(req.session.path)
+//   next()
+// });
+
 app.use('/', indexRouter);
-
-const watchaRouter = require('./routes/watcha');
 app.use('/watcha', watchaRouter);
-
-const boardRouter = require('./routes/board');
-app.use('/board', boardRouter);
-
-const todoRouter = require('./routes/todo');
+app.use('/api', boardRouter);
 app.use('/todo', todoRouter);
+app.use('/api/', commentRouter);
+app.use('/api/', userRouter);
 
-const commentRouter = require('./routes/comment');
-app.use('/board/', commentRouter);
-
-
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log(req)
   next(createError(404));
 });
 

@@ -5,8 +5,13 @@ const CommentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Board",
     },
-    author: String,    
-    comment: {type: String, required: true},
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    createAt: {type: Date, default: Date.now},
+    updateAt: {type: Date, default: null},
+    content: {type: String, required: true},
 })
 
 const Comment = mongoose.model("Comment", CommentSchema);
