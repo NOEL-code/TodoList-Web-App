@@ -18,14 +18,8 @@ router.get('/board', (req, res, next) => {
 router.get("/board/:id", function(req, res, next) {
 
     Board.findById(req.params.id)
-    //.populate('author')
         .then(board => {
-            // User.findById(board.author).then(user=>{
-            //     res.json({
-            //         ... board.toObject(),
-            //         author: user
-            //     })
-            // })
+           
             res.json(board);
         })
         .catch((err) => {

@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "/api";
+const BASE_URL = '/api';
 const instance = axios.create({
   baseURL: BASE_URL,
 });
@@ -17,8 +17,6 @@ instance.interceptors.request.use(
 );
 
 export default instance;
-
-
 
 // const instance = async () => {
 //     const res = await axios.get(url)

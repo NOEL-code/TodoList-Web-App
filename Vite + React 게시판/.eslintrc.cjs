@@ -1,22 +1,15 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    'no-unused-vars': 'off',
-    'react/jsx-no-target-blank': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+  env: {
+    node: true,
   },
-}
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended'],
+  parserOptions: {
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false,
+  },
+  rules: {
+    'no-console': 'warn', //console.log 사용 시 경고
+    'no-unused-vars': 'warn', //할당되지 않은 변수 있을 시 경고
+  },
+};

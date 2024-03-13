@@ -1,68 +1,74 @@
-import React from "react";
-import { createBrowserRouter } from "react-router-dom";
-import MainPage from "~/routes/page";
+import React from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import MainPage from '~/routes/page';
 
-import BoardListPage from "~/routes/board/board";
-import BoardDetailPage from "~/routes/board/detail/detail";
-import Layout from "~/routes/layout";
-import Login from "~/routes/login";
-import Register from "~/routes/register";
-import WritePage from "~/routes/board/writeBoard";
-import ModifyPage from "~/routes/board/detail/modify";
+import BoardListPage from '~/routes/board/board';
+import BoardDetailPage from '~/routes/board/detail/detail';
+import Layout from '~/routes/layout';
+import Login from '~/routes/login';
+import Register from '~/routes/register';
+import WritePage from '~/routes/board/writeBoard';
+import Todo from '~/routes/todo/Todo';
+import ModifyPage from '~/routes/board/detail/modify';
 
 export const mainRoutes = [
   {
-    path: "",
+    path: '',
     element: <Layout />,
     children: [
       {
-        path: "",
+        path: '',
         index: true,
         element: <MainPage />,
       },
       {
-        path: "/modify",
+        path: '/todo',
+        index: true,
+        element: <Todo />,
+      },
+      {
+        path: '/modify',
         children: [
           {
-            path: "",
+            path: '',
             element: <ModifyPage />,
             index: true,
           },
 
           {
-            path: ":boardId",
+            path: ':boardId',
             element: <ModifyPage />,
             index: true,
           },
         ],
       },
       {
-        path: "/writePage",
+        path: '/writePage',
         index: true,
         element: <WritePage />,
       },
       {
-        path: "/login",
+        path: '/login',
         index: true,
-        element: <Login/>,
+        element: <Login />,
       },
       {
-        path: "/register",
+        path: '/register',
         index: true,
-        element: <Register/>,
+        element: <Register />,
       },
-      
+
       {
-        path: "/board",
+        path: '/board',
         children: [
           {
-            path: "",
+            path: '',
             element: <BoardListPage />,
             index: true,
           },
 
           {
-            path: ":boardId",
+            path: ':boardId',
             element: <BoardDetailPage />,
             index: true,
           },

@@ -27,65 +27,64 @@ function Register() {
     }
     try {
       const response = await PostRegister(state);
-      console.log(response.data); // Assuming your registration API returns some data
-      // Redirect user or perform actions after successful registration
+      console.log(response.data);
+      navigate('/login');
     } catch (error) {
       console.error('Error registering:', error);
       // Handle registration error
     }
-    
   };
 
   return (
     <Form onSubmit={onSubmitHandler}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className='mb-3' controlId='formBasicEmail'>
         <Form.Label>Email address</Form.Label>
         <Form.Control
-          name="email"
+          name='email'
           value={state.email}
           onChange={handleChangeState}
-          type="email"
-          placeholder="Enter email"
+          type='email'
+          placeholder='Enter email'
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicNickname">
+      <Form.Group className='mb-3' controlId='formBasicNickname'>
         <Form.Label>Nickname</Form.Label>
         <Form.Control
-          name="nickname"
+          name='nickname'
           value={state.nickname}
           onChange={handleChangeState}
-          type="text"
-          placeholder="Enter Nickname"
+          type='text'
+          placeholder='Enter Nickname'
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className='mb-3' controlId='formBasicPassword'>
         <Form.Label>Password</Form.Label>
         <Form.Control
-          name="password"
+          name='password'
           value={state.password}
           onChange={handleChangeState}
-          type="password"
-          placeholder="Password"
+          type='password'
+          placeholder='Password'
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPasswordCheck">
+      <Form.Group className='mb-3' controlId='formBasicPasswordCheck'>
         <Form.Control
-          name="passwordCheck"
+          name='passwordCheck'
           value={state.passwordCheck}
           onChange={handleChangeState}
-          type="password"
-          placeholder="Password Check"
+          type='password'
+          placeholder='Password Check'
         />
       </Form.Group>
 
-      <Button variant="secondary" type="submit">
+      <Button variant='secondary' type='submit'>
         Register
       </Button>
 
-      <Link to={'/login'} className="ml-2" style={{ float: 'right' }}>
+      <Link to={'/login'} className='ml-2' style={{ float: 'right' }}>
         Already have an account? Login here.
       </Link>
     </Form>
